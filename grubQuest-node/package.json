@@ -1,0 +1,28 @@
+{
+	"name": "grubquest",
+	"version": "0.0.1",
+	"authors":[
+		{
+			"name": "ncarvalho",
+			"email": "nicolecarvalho@fullsail.edu"
+		},
+		{
+			"name": "egemayel",
+			"email": "eddiegem16@gmail.com"
+		},
+		{
+			"name": "ctrovato",
+			"email": "trovato.carmine@gmail.com"
+		},
+		{
+			"name": "docarroll",
+			"email": "danieljocarroll"
+		}
+	],
+	"dependencies": {
+		"express": "*",
+		"ejs-locals": "*",
+		"mongojs": "*",
+	    "async": "*"
+	}
+}
