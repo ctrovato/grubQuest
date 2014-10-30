@@ -26,7 +26,7 @@
 		db.collection('test', {strict:true}, function(err, collection) {});
 
 	```
-4.	Storing info in variables
+4.	Storing info into variables
 	*
 	```javascript
 		//Storing collection
