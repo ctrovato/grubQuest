@@ -33,3 +33,44 @@
 		var collection = db.collection('test');
 
 	```
+####Parsing Json using Node
+1. Store request into a variable
+	* 
+	```javascript
+		var request = require('request');
+	```
+2. Make the Request
+	*
+	```javascript
+		//url for the API stored in a variable
+		apiURL = 'http://api.wunderground.com/api/00bacbd3046f5248/conditions/q/'+zipcode+'.json';
+
+		// make the request to the api
+		request(apiURL, function (error, response, body) {
+
+		});
+	```
+3. Parse Incoming json
+	*
+	```javascript
+		// Parse the incoming json
+		var json = JSON.parse(response.body);
+	```
+4. Spit back out the info needed
+	*
+	```javascript
+		//if there is no errors in retrieving location
+			if(!json.response.error){
+				//spit back out the information to the user
+				msg.send(json.current_observation.display_location.city + ", " + json.current_observation.display_location.state_name + " on " + json.current_observation.local_time_rfc822 +
+				"\nTemperature: " + json.current_observation.temp_f + " degrees Fahrenheit.\nFeels like: " +
+				json.current_observation.feelslike_f + " degrees Fahrenheit.");
+
+				//if there is an error
+			}else{
+				//display that specific error message from the json
+				var error = json.response.error.description;
+				//spit back out the error to the user
+				msg.send(error);
+			}
+	```
