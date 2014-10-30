@@ -14,7 +14,8 @@ app.engine('ejs', engine);
 
 // set template engine to ejs (jade sucks)
 app.set('view engine', 'ejs');
-app.use('/public', express.static(__dirname + '/public'));
+app.use('/views', express.static('/views'));
+app.use('/assets', express.static(__dirname + '/assets'));
 
 
 app.get("/", function(req, res){
@@ -24,5 +25,5 @@ app.get("/", function(req, res){
 
 // Start the Server
 httpServer.listen(4000, function() {
-	console.log('Express server listening on port 4000');
+	console.log('listening on port 4000');
 });
