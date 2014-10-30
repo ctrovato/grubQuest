@@ -22,7 +22,7 @@
 3.	Creating Collections
 	* 
 	```javascript
-	
+
 		//The '{strict:true}' makes sure collection doesn't already exist. If it already exists it will return with an error.
 		db.collection('test', {strict:true}, function(err, collection) {});
 
@@ -35,6 +35,8 @@
 		var collection = db.collection('test');
 
 	```
+
+
 ####Parsing Json using Node
 1. Store request into a variable
 	* 
