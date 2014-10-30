@@ -77,8 +77,6 @@
 			}else{
 				//display that specific error message from the json
 				var error = json.response.error.description;
-				//spit back out the error to the user
-				msg.send(error);
 			}
 
 	```
