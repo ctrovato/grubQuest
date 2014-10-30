@@ -1,0 +1,1 @@
+Make sure to drop both the users files into your db mongo folder to get it to function properly. DO NOT DROP THE ENTIRE MONGO DATABASE FOLDER INTO YOUR DB FOLDER. YOU WILL REGRET LIFE.
