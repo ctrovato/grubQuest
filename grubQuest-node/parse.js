@@ -29,7 +29,7 @@ function getVenue(msg){
 					var json = JSON.parse(meta.body);
 
 					//if there is no errors in retrieving location
-					if(!json.object!=[]){ç
+					if(!json.object!=[]){
 
 						//spit back out the information to the user
 						msg.send(json.objects[0] + "<br>" + json.objects.street_address + " " + json.objects[0].locality + " " + json.objects[0].postal_code + "<br>" +
