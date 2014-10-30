@@ -57,24 +57,29 @@
 3. Parse Incoming Json
 	*
 	```javascript
+
 		// Parse the incoming json
 		var json = JSON.parse(response.body);
+
 	```
 4. Spit back out the info needed
 	*
 	```javascript
-		//if there is no errors in retrieving location
+
+		//if there is no errors in retrieving the data
 			if(!json.response.error){
 				//spit back out the information to the user
 				msg.send(json.current_observation.display_location.city + ", " + json.current_observation.display_location.state_name + " on " + json.current_observation.local_time_rfc822 +
 				"\nTemperature: " + json.current_observation.temp_f + " degrees Fahrenheit.\nFeels like: " +
 				json.current_observation.feelslike_f + " degrees Fahrenheit.");
 
-				//if there is an error
+		//if there is an error
 			}else{
 				//display that specific error message from the json
 				var error = json.response.error.description;
 				//spit back out the error to the user
 				msg.send(error);
 			}
+
 	```
+5. 
