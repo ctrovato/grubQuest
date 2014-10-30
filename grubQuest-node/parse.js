@@ -1,13 +1,13 @@
+
 //REMOVE MSG
 
 var request = require('request');
 
 // Function to find the weather of the location entered
-function getWeather(){
+function getWeather(msg){
 
 	//get zipcode the user entered
 	var zipcode = '';
-
 
 	// Conditional statement to check if user entered an integer or not
 	if (isNaN(zipcode)) {
