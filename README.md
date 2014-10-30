@@ -2,7 +2,7 @@
 ##grubQuest
 ## ------------
 ####Connecting to Mongo with Node
-1. Run command to install Mongo Driver
+1. Run command to install Mongo Driver if you don't have it
   * npm install mongodb
 2. How to Connect to the database
   * 
@@ -37,7 +37,7 @@
 	```
 
 
-####Parsing Json using Node
+####Parsing Incoming Json using Node
 1. Store request into a variable
 	* 
 	```javascript
@@ -54,7 +54,7 @@
 
 		});
 	```
-3. Parse Incoming Json
+3. Parse Incoming Json (do this inside the request function)
 	*
 	```javascript
 
@@ -82,4 +82,3 @@
 			}
 
 	```
-5. 
