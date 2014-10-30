@@ -81,11 +81,10 @@
 
 	```
 
-
 	*** API URL with API KEY
-	Venue Json:
-	http://api.locu.com/v1_0/venue/search/?postal_code=32822&has_menu=true&api_key=2834e3e19203329d8c2d1d6208afdd0c44fe2ad6
 
+Venue Json:
+http://api.locu.com/v1_0/venue/search/?postal_code=32822&has_menu=true&api_key=2834e3e19203329d8c2d1d6208afdd0c44fe2ad6
 
 Menu Json:
 http://api.locu.com/v1_0/venue/33704cd495fcacedef7b/?api_key=2834e3e19203329d8c2d1d6208afdd0c44fe2ad6
