@@ -59,7 +59,7 @@
 	```javascript
 
 		// Parse the incoming json
-		var json = JSON.parse(response.body);
+		var json = JSON.parse(body);
 
 	```
 4. Spit back out the info needed
