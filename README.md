@@ -50,7 +50,7 @@
 
 		});
 	```
-3. Parse Incoming json
+3. Parse Incoming Json
 	*
 	```javascript
 		// Parse the incoming json
