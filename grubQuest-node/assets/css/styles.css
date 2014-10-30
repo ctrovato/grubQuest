@@ -18,6 +18,9 @@ body{
 h1, h2, h3{
 	font-family: AveriaSans, Verdana, sans-serif;
 }
+img{
+	width: 100%;
+}
 
 /*----------------------- LAYOUT ------------------------------*/
 * {
@@ -27,18 +30,17 @@ html, body {
   height: 100%;
 }
 .container {
-  min-height: 100%;
-  /* equal to footer height */
-  margin-bottom: -40px; 
+	min-height: 100%;
+	/* equal to footer height */
+	margin-bottom: -40px; 
 }
 .container:after {
-  content: "";
-  display: block;
+	content: "";
+	display: block;
 }
 footer, .container:after {
-  height: 40px; 
+	height: 40px; 
 }
-
 footer{
 	background-color: #008CB2;
 	padding: 10px;
@@ -51,12 +53,22 @@ footer p{
 
 /*----------------------- INDEX ------------------------------*/
 
-.index{
+.index .log-in{
+	text-align: right;
+	padding: 10px;
+	font-size: 16pt;
+	font-family: AveriaSans, Verdana, sans-serif;
+	text-decoration: underline;
+}
+.index .index-search{
 	margin-top: 100px;
 }
 
 .index form div{
 	padding: 0 5px !important;
+}
+.index form input, .index form select{
+	margin: 5px 0;
 }
 .index form button[type="submit"]{
 	width: 100%;
@@ -69,10 +81,41 @@ footer p{
 .index form button[type="submit"]:hover{
 	background: #FF8A19;
 }
+.index .sign-up{
+	font-family: AveriaSans, Verdana, sans-serif;
+	padding: 15px;
+	font-size: 14pt;
+}
+.index .sign-up p{
+	padding: 5px;
+}
+.index .sign-up a{
+	text-decoration: underline;
+}
+
+/*----------------------- HEADER ------------------------------*/
+
+header{
+	margin-top: 10px;
+	overflow: hidden;
+}
+header .log-in{
+	text-align: right;
+	padding: 0 10px;
+	font-size: 16pt;
+	font-family: AveriaSans, Verdana, sans-serif;
+	text-decoration: underline;
+}
 
 
+/*----------------------- RESULTS ------------------------------*/
 
-
-
-
-
+.results .alert{
+	background: #ccc;
+	padding: 5px;
+	margin: 20px 0;
+}
+.results .alert h2{
+	margin: 0;
+	font-size: 15pt;
+}
