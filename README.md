@@ -5,7 +5,7 @@
 1. Run command to install Mongo Driver if you don't have it
   * npm install mongodb
 2. How to Connect to the database
-  * 
+  *
   ```javascript
     // Retrieve
     var MongoClient = require('mongodb').MongoClient;
@@ -20,7 +20,7 @@
   });
   ```
 3.	Creating Collections
-	* 
+	*
 	```javascript
 
 		//The '{strict:true}' makes sure collection doesn't already exist. If it already exists it will return with an error.
@@ -39,7 +39,7 @@
 
 ####Parsing Incoming Json using Node
 1. Store request into a variable
-	* 
+	*
 	```javascript
 		var request = require('request');
 	```
@@ -80,3 +80,14 @@
 			}
 
 	```
+
+
+	*** API URL with API KEY
+	Venue Json:
+	http://api.locu.com/v1_0/venue/search/?postal_code=32822&has_menu=true&api_key=2834e3e19203329d8c2d1d6208afdd0c44fe2ad6
+
+
+Menu Json:
+http://api.locu.com/v1_0/venue/33704cd495fcacedef7b/?api_key=2834e3e19203329d8c2d1d6208afdd0c44fe2ad6
+
+
