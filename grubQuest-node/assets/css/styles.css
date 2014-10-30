@@ -1,3 +1,78 @@
-body{
-	color: red;
+/*
+Colors:
+#3B1F05 Brown
+#FF8A19 Orange 1
+#FF7D00 Orange 2
+#008CB2 Blue 1
+#00C8FF Blue 2
+
+*/
+
+@font-face {
+    font-family: AveriaSans;
+    src: url("../fonts/AveriaSans-Regular.ttf");
 }
+body{
+	font-family: Arial, Verdana, sans-serif;
+}
+h1, h2, h3{
+	font-family: AveriaSans, Verdana, sans-serif;
+}
+
+/*----------------------- LAYOUT ------------------------------*/
+* {
+  margin: 0;
+}
+html, body {
+  height: 100%;
+}
+.container {
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -40px; 
+}
+.container:after {
+  content: "";
+  display: block;
+}
+footer, .container:after {
+  height: 40px; 
+}
+
+footer{
+	background-color: #008CB2;
+	padding: 10px;
+	text-align: center;
+	color: #EFEFEF;
+}
+footer p{
+	margin: 0;
+}
+
+/*----------------------- INDEX ------------------------------*/
+
+.index{
+	margin-top: 100px;
+}
+
+.index form div{
+	padding: 0 5px !important;
+}
+.index form button[type="submit"]{
+	width: 100%;
+	margin-top: 10px;
+	background: #FF7D00;
+	color: #EFEFEF;
+	font-size: 16pt;
+	font-family: AveriaSans, Verdana, sans-serif;
+}
+.index form button[type="submit"]:hover{
+	background: #FF8A19;
+}
+
+
+
+
+
+
+
