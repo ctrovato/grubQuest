@@ -4,6 +4,8 @@ var engine = require("ejs-locals");
 var fs = require('fs');
 var async = require("async");
 var http = require("http");
+var locu = require('locu');
+
 
 var app = express();
 
