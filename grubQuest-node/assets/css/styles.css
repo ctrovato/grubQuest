@@ -14,12 +14,17 @@ Colors:
 }
 body{
 	font-family: Arial, Verdana, sans-serif;
+	color: #333;
 }
 h1, h2, h3{
 	font-family: AveriaSans, Verdana, sans-serif;
+	color: #3B1F05;
 }
 img{
 	width: 100%;
+}
+a{
+	text-decoration: underline;
 }
 
 /*----------------------- LAYOUT ------------------------------*/
@@ -58,7 +63,6 @@ footer p{
 	padding: 10px;
 	font-size: 16pt;
 	font-family: AveriaSans, Verdana, sans-serif;
-	text-decoration: underline;
 }
 .index .index-search{
 	margin-top: 100px;
@@ -89,9 +93,6 @@ footer p{
 .index .sign-up p{
 	padding: 5px;
 }
-.index .sign-up a{
-	text-decoration: underline;
-}
 
 /*----------------------- HEADER ------------------------------*/
 
@@ -104,18 +105,132 @@ header .log-in{
 	padding: 0 10px;
 	font-size: 16pt;
 	font-family: AveriaSans, Verdana, sans-serif;
-	text-decoration: underline;
 }
 
 
 /*----------------------- RESULTS ------------------------------*/
 
 .results .alert{
-	background: #ccc;
+	background: #f5f5f5;
 	padding: 5px;
 	margin: 20px 0;
 }
 .results .alert h2{
 	margin: 0;
 	font-size: 15pt;
+}
+.results .dropdown{
+	padding: 0;
+}
+.results .dropdown button{
+	border-radius: 0;
+}
+.results .dropdown-menu{
+	border-radius: 0;
+}
+.results nav{
+	padding: 0;
+}
+.results .pagination{
+	margin: 0;
+	float: right;
+}
+.results .restaurant-result{
+	border: 1px solid #008CB2;
+	overflow: hidden;
+	margin: 10px 0;
+}
+.results .restaurant-result:hover{
+	background-color: #EFEFEF;
+}
+.results p{
+	margin: 0;
+}
+.results ul li{
+	list-style-type: none;
+	list-style-position: outside;
+}
+.results .open{
+	margin: 10px 0;
+}
+
+/*----------------------- DETAILS ------------------------------*/
+
+.details .breadcrumb{
+	margin: 20px 0;
+}
+.details ul li{
+	list-style-type: none;
+	list-style-position: outside;
+	font-size: 16pt;
+}
+.details ul li h3{
+	font-size: 36pt;
+}
+.details h2.open{
+	color: green;
+	border: 3px solid green;
+	text-align: center;
+	border-radius: 200px;
+	padding: 40px 20px;
+	font-size: 20pt;
+}
+.details .alert{
+	background: #f5f5f5;
+	padding: 5px;
+	margin: 20px 0;
+}
+.details .alert h2{
+	margin: 0;
+	font-size: 25pt;
+}
+.details table{
+	font-size: 14pt;
+	width: 100%;
+	margin-bottom: 20px;
+}
+.details table th{
+	border-bottom: 3px solid #333;
+}
+.details table td{
+	padding: 5px 0;
+}
+.details table td:nth-child(2){
+	text-align: right;
+}
+
+/*----------------------- LOGIN ------------------------------*/
+
+.login form input{
+	margin: 5px 0;
+}
+.login form button[type="submit"]{
+	width: 100%;
+	margin-top: 10px;
+	background: #FF7D00;
+	color: #EFEFEF;
+	font-size: 16pt;
+	font-family: AveriaSans, Verdana, sans-serif;
+}
+.login .sign-up{
+	font-family: AveriaSans, Verdana, sans-serif;
+	padding: 15px;
+	font-size: 14pt;
+}
+.login .sign-up p{
+	padding: 5px;
+}
+
+/*----------------------- REGISTER ------------------------------*/
+
+.register form input{
+	margin: 5px 0;
+}
+.register form button[type="submit"]{
+	width: 100%;
+	margin-top: 10px;
+	background: #FF7D00;
+	color: #EFEFEF;
+	font-size: 16pt;
+	font-family: AveriaSans, Verdana, sans-serif;
 }
