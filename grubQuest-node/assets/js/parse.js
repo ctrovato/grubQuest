@@ -28,7 +28,7 @@ function getResults(){
 					var json = JSON.parse(body);
 
 					//if there is no errors in retrieving location
-					if(!json.object!=[]){
+					if(json.object.length != 0){
 
 						//spit back out the information to the user
 						console.log(json.objects[0] + "<br> Street Address: " + json.objects.street_address[0] + ". Located in " + json.objects[0].locality + " " + json.objects[0].postal_code + "<br>" +
@@ -36,7 +36,7 @@ function getResults(){
 
 					//if there is an error
 					}else{
-						console.log("API request did not go through.");
+						console.log("Request brought nothing back.");
 					}
 				}else{
 					//If the API actually never responds whatsoever
