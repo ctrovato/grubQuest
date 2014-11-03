@@ -36,8 +36,7 @@ function getResults(){
 
 					//if there is an error
 					}else{
-
-
+						console.log("API request did not go through.");
 					}
 				}else{
 					//If the API actually never responds whatsoever
