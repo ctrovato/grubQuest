@@ -156,6 +156,10 @@ header .log-in{
 .results #dropdownMenu1{
 	background-image: none;
 }
+.results article{
+	padding: 0 5px;
+}
+
 
 /*----------------------- DETAILS ------------------------------*/
 
