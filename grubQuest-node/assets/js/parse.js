@@ -2,16 +2,7 @@ var my_api_key = '2834e3e19203329d8c2d1d6208afdd0c44fe2ad6'; // swap this out fo
 var menu_client = new locu.MenuItemClient(my_api_key);
 
 	//get zipcode the user entered
-<<<<<<< HEAD
-var zipcode = '';
-=======
 	var zipcode = '';
-	
-<<<<<<< HEAD
->>>>>>> FETCH_HEAD
-=======
->>>>>>> FETCH_HEAD
-
 
 	// Conditional statement to check if user entered an integer or not
 	if (isNaN(zipcode)) {
