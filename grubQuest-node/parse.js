@@ -1,11 +1,13 @@
+
+//REMOVE MSG
+
 var request = require('request');
 
-// Function to find the menu results of the location entered
-function getResults(){
+// Function to find the weather of the location entered
+function getWeather(msg){
 
 	//get zipcode the user entered
 	var zipcode = '';
-
 
 	// Conditional statement to check if user entered an integer or not
 	if (isNaN(zipcode)) {
@@ -28,15 +30,16 @@ function getResults(){
 					var json = JSON.parse(body);
 
 					//if there is no errors in retrieving location
-					if(json.object.length != 0){
+					if(!json.object!=[]){
 
 						//spit back out the information to the user
-						console.log(json.objects[0] + "<br> Street Address: " + json.objects.street_address[0] + ". Located in " + json.objects[0].locality + " " + json.objects[0].postal_code + "<br>" +
+						console.log(json.objects[0] + "<br>" + json.objects.street_address[0] + " " + json.objects[0].locality + " " + json.objects[0].postal_code + "<br>" +
 							"\nCall: " + json.objects[0].phone + "<br>" + json.objects[0].website_url + "<br>" +);
 
 					//if there is an error
 					}else{
-						console.log("Error");
+
+
 					}
 				}else{
 					//If the API actually never responds whatsoever
@@ -46,3 +49,8 @@ function getResults(){
 		});
 	}
 }
+
+
+
+
+
