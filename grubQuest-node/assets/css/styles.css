@@ -153,6 +153,9 @@ header .log-in{
 .results .open-now{
 	margin: 10px 0;
 }
+.results #dropdownMenu1{
+	background-image: none;
+}
 
 /*----------------------- DETAILS ------------------------------*/
 
