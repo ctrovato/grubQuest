@@ -15,7 +15,7 @@ function getResults(){
 	}else {
 
 		//url for the API stored in a variable
-		apiURL = 'http://api.locu.com/v1_0/venue/search/?postal_code=' + zipcode + '&has_menu=true&api_key=2834e3e19203329d8c2d1d6208afdd0c44fe2ad6';
+		apiURL = 'http://api.locu.com/v1_0/venue/search/?postal_code=' + zipcode + '&category=restaurant&has_menu=true&api_key=2834e3e19203329d8c2d1d6208afdd0c44fe2ad6';
 
 
 		// make the request to the api
