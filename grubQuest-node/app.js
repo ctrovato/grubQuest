@@ -8,8 +8,6 @@ var mongojs = require("mongojs"),
 	port = 4000;
 
 
-
-
 var app = express();
 
 // Create the http Server
@@ -31,17 +29,11 @@ app.get('/:page',function(req, res){
 	if(fs.existsSync('views/'+req.params.page+'.ejs')){
 		res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
 	}else{
-		res.render('404: Page not found');
-	}
-});
-
-app.get('/:results',function(req, res){
-	if(fs.existsSync('views/'+req.params.page+'.ejs')){
-		res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
-	}else{
 		res.render('404');
 	}
 });
+
+
 
 
 

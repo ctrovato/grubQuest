@@ -7,6 +7,9 @@ var zipcode = '';
 =======
 	var zipcode = '';
 	
+<<<<<<< HEAD
+>>>>>>> FETCH_HEAD
+=======
 >>>>>>> FETCH_HEAD
 
 
