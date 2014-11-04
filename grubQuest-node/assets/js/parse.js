@@ -5,6 +5,7 @@ function getResults(){
 
 	//get zipcode the user entered
 	var zipcode = '';
+	
 
 
 	// Conditional statement to check if user entered an integer or not
