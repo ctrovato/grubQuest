@@ -121,6 +121,7 @@ header .log-in{
 }
 .results .dropdown{
 	padding: 0;
+	padding-left: 5px;
 }
 .results .dropdown button{
 	border-radius: 0;
@@ -133,6 +134,7 @@ header .log-in{
 }
 .results .pagination{
 	margin: 0;
+	padding-right: 5px;
 	float: right;
 }
 .results .restaurant-result{
