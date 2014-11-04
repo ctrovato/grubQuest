@@ -7,6 +7,8 @@ var http = require("http");
 var locu = require('locu');
 
 
+
+
 var app = express();
 
 // Create the http Server
@@ -27,13 +29,8 @@ app.get("/", function(req, res){
 app.get('/:page',function(req, res){
 	if(fs.existsSync('views/'+req.params.page+'.ejs')){
 		res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
-	}else if(req.params.page === "sitemap.xml"){
-		sitemap.toXML( function (xml) {
-			res.header('Content-Type', 'application/xml');
-			res.send( xml );
-		});
 	}else{
-		res.render('404');
+		res.render('404: Page not found');
 	}
 });
 
