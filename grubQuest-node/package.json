@@ -23,6 +23,7 @@
 		"express": "*",
 		"ejs-locals": "*",
 		"mongojs": "*",
-	    "async": "*"
+  "async": "*",
+  "locu":"*"
 	}
 }

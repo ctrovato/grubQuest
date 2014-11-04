@@ -1,10 +1,11 @@
-var mongojs = require("mongojs");
-var express = require("express");
-var engine = require("ejs-locals");
-var fs = require('fs');
-var async = require("async");
-var http = require("http");
-var locu = require('locu');
+var mongojs = require("mongojs"),
+	express = require("express"),
+	engine = require("ejs-locals"),
+	fs = require('fs'),
+	async = require("async"),
+	http = require("http"),
+	locu = require('locu'),
+	port = 4000;
 
 
 var app = express();
@@ -27,18 +28,24 @@ app.get("/", function(req, res){
 app.get('/:page',function(req, res){
 	if(fs.existsSync('views/'+req.params.page+'.ejs')){
 		res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
-	}else if(req.params.page === "sitemap.xml"){
-		sitemap.toXML( function (xml) {
-			res.header('Content-Type', 'application/xml');
-			res.send( xml );
-		});
+	}else{
+		res.render('404');
+	}
+});
+
+app.get('/:results',function(req, res){
+	if(fs.existsSync('views/'+req.params.page+'.ejs')){
+		res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
 	}else{
 		res.render('404');
 	}
 });
 
 
+
+
+
 // Start the Server
-httpServer.listen(4000, function() {
-	console.log('listening on port 4000');
+httpServer.listen(port, function() {
+	console.log('listening on port '+port);
 });
