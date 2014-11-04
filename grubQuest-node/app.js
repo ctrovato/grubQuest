@@ -24,16 +24,36 @@ app.use('/assets', express.static(__dirname + '/assets'));
 
 
 app.get("/", function(req, res){
-	res.render("index", {"Greeting": "Good morning"})
+	res.render("index", {"Greeting": "Good morning"});
+
 });
 app.get('/:page',function(req, res){
 	if(fs.existsSync('views/'+req.params.page+'.ejs')){
 		res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
+
 	}else{
 		res.render('404: Page not found');
 	}
 });
 
+
+app.get("/results", function (req, res){
+	if(fs.existsSync('views/'+req.params.page+'.ejs')){
+
+		res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
+		var locu = require("locu");
+		var key = "2834e3e19203329d8c2d1d6208afdd0c44fe2ad6";
+		var vclient = new locu.VenueClient(key);
+		vclient.search({has_menu: true, category: 'restaurant', postal_code: 32792}, function(results){
+			console.log(results);
+		});
+
+	}else{
+		res.render('404: Page not found');
+	}
+	
+
+});
 
 // Start the Server
 httpServer.listen(4000, function() {
