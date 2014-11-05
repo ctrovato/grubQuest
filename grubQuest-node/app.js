@@ -48,7 +48,11 @@ vclient.search({has_menu: 'True', category: 'restaurant', postal_code: 32792}, f
 app.get("/results", function (req, res){
 	if(fs.existsSync('views/'+req.params.page+'.ejs')){
 
+<<<<<<< HEAD
 		res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
+=======
+		});
+>>>>>>> FETCH_HEAD
 
 	}else{
 		res.render('404: Page not found');
