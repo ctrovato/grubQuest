@@ -91,3 +91,21 @@ Menu Json:
 http://api.locu.com/v1_0/venue/33704cd495fcacedef7b/?api_key=2834e3e19203329d8c2d1d6208afdd0c44fe2ad6
 
 
+
+
+functional database query
+*
+```
+var locu = require('locu');
+var key = '2834e3e19203329d8c2d1d6208afdd0c44fe2ad6';
+var vclient = new locu.VenueClient(key);
+var search = [];
+vclient.search({has_menu: 'True', category: 'restaurant', postal_code: 32792}, function(results){ var http = require('http');
+http.createServer(function (request, response){
+	response.writeHead(200, {'Content-Type': 'text/plain'});
+	response.write(" "+results['objects'][0].name+".");
+	response.end();
+}).listen(8080);
+});
+```
+
