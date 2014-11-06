@@ -236,7 +236,7 @@ header .log-in{
 	margin: 5px 0;
 }
 .register form button[type="submit"]{
-	width: 100%;
+	/*width: 100%;*/
 	margin-top: 10px;
 	background: #FF7D00;
 	color: #EFEFEF;
