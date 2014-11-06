@@ -48,10 +48,8 @@ app.get('/:page',function(req, res){
 		console.log("Json: %j", global.searchVar[0].objects[0].name);
 		//returns all restaurants
 		console.log("Json: %j", global.searchVar);
-		return global.searchVar;
-	});
 
-	if(fs.existsSync('views/'+req.params.page+'.ejs')){
+		if(fs.existsSync('views/'+req.params.page+'.ejs')){
 		res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
 
 		//Using Global Variables returns this
@@ -61,6 +59,8 @@ app.get('/:page',function(req, res){
 	}else{
 		res.render('404: Page not found');
 	}
+	});
+
 });
 
 app.get("/results", function (req, res){
