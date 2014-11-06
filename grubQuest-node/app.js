@@ -63,12 +63,6 @@ app.get('/:page',function(req, res){
 	});
 
 	if(fs.existsSync('views/'+req.params.page+'.ejs')){
-
-		res.render(req.params.page, {message: req.params.id});
-		//Using Global Variables returns this
-		//Cannot read property '0' of undefined
-		res.write("Json  ", global.searchVar[0], " ");
-
 		//Using Global Variables returns this
 		//Cannot read property '0' of undefined
 		res.write("Json  ", global.searchVar[0], " ");
