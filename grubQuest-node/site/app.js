@@ -1,5 +1,6 @@
 var mongojs = require("mongojs"),
 	express = require("express"),
+	url = require("url"),
 	// bodyParser = require('body-parser'),
 	// cookieParser = require('cookie-parser'),
 	// session = require('express-session'),
@@ -70,11 +71,12 @@ app.get('/:page',function(req, res){
 		//returns all restaurants
 		console.log("Json: %j", global.searchVar);
 
+
 		if(fs.existsSync('views/'+req.params.page+'.ejs')){
 			//Using Global Variables returns this
 			//Cannot read property '0' of undefined
 
-			res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
+			res.render(req.params.page, {message: req.params.id});
 			res.write("Json  ", global.searchVar[0], " ");
 	}else{
 		res.render('404: Page not found');
@@ -84,11 +86,28 @@ app.get('/:page',function(req, res){
 });
 
 
+
 // RESULTS PAGE ---------------------------------------------------------------------------------------------------
 app.get("/results", function (req, res){
 	if(fs.existsSync('views/'+req.params.page+'.ejs')){
 
 		res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
+
+
+	}else{
+		res.render('404: Page not found');
+	}
+});
+
+
+// DETAILS PAGE ---------------------------------------------------------------------------------------------------
+app.get("/details/:name/:menuId", function (req, res){
+	if(fs.existsSync('views/'+req.params.page+'.ejs')){
+
+		// console.log(url.parse("http://localhost:4000/details/?name=Subway&menuId=0898c257b1d80a428a3b",true).pathname);
+
+
+		res.render(req.params.page, {message: req.params.id});
 
 
 	}else{

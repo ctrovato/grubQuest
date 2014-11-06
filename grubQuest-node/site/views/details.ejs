@@ -7,16 +7,16 @@
 	<ol class="breadcrumb">
 	  <li><a href="/">Home</a></li>
 	  <li><a href="/results">Results</a></li>
-	  <li class="active"></li>
+	  <li class="active"><%=searchVar[0].objects[i].name%></li>
 	</ol>
 
 	<article class="col-sm-12 col-xs-12">
 		<div class="restaurant-result">
 			<ul class="col-xs-10">
-				<li><h3>Lucky China</h3></li>
-				<li>6756 Aloma Ave, Winter Park, FL 32792</li>
-				<li>(407) 679-4016</li>
-				<li>http://www.luckychinawinterpark.com/</li>
+				<li><h3><%=searchVar[0].objects[i].name%></h3></li>
+				<li><%=searchVar[0].objects[i].street_address%></li>
+				<li><%=searchVar[0].objects[i].phone%></li>
+				<li><%=searchVar[0].objects[i].website_url%></li>
 				<li><a href="#">Get Directions</a></li>
 			</ul>
 			<div class="col-xs-2">
