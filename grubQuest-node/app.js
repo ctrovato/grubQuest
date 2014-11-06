@@ -40,21 +40,23 @@ app.get('/:page',function(req, res){
 	vclient.search({has_menu: 'True', category: 'restaurant', postal_code: 32792}, function(results){
 		
 		//search result objects stored in array
-		var searchVar = new Array();
+		global.searchVar = new Array();
 
-		searchVar.push(results);
+		global.searchVar.push(results);
 
 		//returns "Subway"
-		console.log("Json: %j", searchVar[0].objects[0].name);
+		console.log("Json: %j", global.searchVar[0].objects[0].name);
 		//returns all restaurants
-		console.log("Json: %j", searchVar);
-		return searchVar;
+		console.log("Json: %j", global.searchVar);
+		return global.searchVar;
 	});
 
 	if(fs.existsSync('views/'+req.params.page+'.ejs')){
 		res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
 
-		res.write(searchVar[0].objects[0].name);
+		//Using Global Variables returns this
+		//Cannot read property '0' of undefined
+		res.write("Json  ", global.searchVar[0], " ");
 
 	}else{
 		res.render('404: Page not found');
