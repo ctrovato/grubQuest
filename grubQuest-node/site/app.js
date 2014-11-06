@@ -1,5 +1,6 @@
 var mongojs = require("mongojs"),
 	express = require("express"),
+	url = require("url"),
 	// bodyParser = require('body-parser'),
 	// cookieParser = require('cookie-parser'),
 	// session = require('express-session'),
@@ -31,7 +32,7 @@ var httpServer = http.createServer(app);
 // Set View Engine to EJS
 app.engine('ejs', engine);
 
-// set template engine to ejs 
+// set template engine to ejs
 app.set('view engine', 'ejs');
 app.use('/views', express.static('/views'));
 app.use('/assets', express.static(__dirname + '/assets'));
@@ -54,12 +55,12 @@ app.get("/", function(req, res){
 app.get('/:page',function(req, res){
 	//GETTING JSON AND PUTTING IT INTO AN ARRAY
 	//STILL CANT GET IT TO WRITE TO THE ACTUAL PAGE
-	//new client 
+	//new client
 	//initialize with locu method
 	var vclient = new locu.VenueClient(key);
 
 	vclient.search({has_menu: 'True', category: 'restaurant', postal_code: 32792}, function(results){
-		
+
 		//search result objects stored in array
 		global.searchVar = new Array();
 
@@ -70,11 +71,12 @@ app.get('/:page',function(req, res){
 		//returns all restaurants
 		console.log("Json: %j", global.searchVar);
 
+
 		if(fs.existsSync('views/'+req.params.page+'.ejs')){
 			//Using Global Variables returns this
 			//Cannot read property '0' of undefined
-			
-			res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
+
+			res.render(req.params.page, {message: req.params.id});
 			res.write("Json  ", global.searchVar[0], " ");
 	}else{
 		res.render('404: Page not found');
@@ -84,13 +86,30 @@ app.get('/:page',function(req, res){
 });
 
 
+
 // RESULTS PAGE ---------------------------------------------------------------------------------------------------
 app.get("/results", function (req, res){
 	if(fs.existsSync('views/'+req.params.page+'.ejs')){
 
 		res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
 
-		
+
+	}else{
+		res.render('404: Page not found');
+	}
+});
+
+
+// DETAILS PAGE ---------------------------------------------------------------------------------------------------
+app.get("/details/:name/:menuId", function (req, res){
+	if(fs.existsSync('views/'+req.params.page+'.ejs')){
+
+		// console.log(url.parse("http://localhost:4000/details/?name=Subway&menuId=0898c257b1d80a428a3b",true).pathname);
+
+
+		res.render(req.params.page, {message: req.params.id});
+
+
 	}else{
 		res.render('404: Page not found');
 	}
