@@ -9,11 +9,12 @@ var mongojs = require("mongojs"),
 	port = 4000;	//port number
 
 
+var collections = ["users"];
+var db = require("mongojs").connect("mongodb://localhost:27017/users", collections);
+
 
 //initlaize express
 var app = express();
-
-// Create the http Server
 var httpServer = http.createServer(app);
 
 // Set View Engine to EJS
@@ -62,16 +63,50 @@ app.get('/:page',function(req, res){
 	});
 
 	if(fs.existsSync('views/'+req.params.page+'.ejs')){
-		res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
-
+		res.render(req.params.page, {message: req.params.id});
 		//Using Global Variables returns this
 		//Cannot read property '0' of undefined
 		res.write("Json  ", global.searchVar[0], " ");
-
 	}else{
 		res.render('404: Page not found');
 	}
 });
+
+app.post('/register', function(reg,res){
+	var hashed = sha224("grubQuest"+req.body.register[0].username+req.body.register[0].password);
+	db.users.insert({
+		_id:uId.v4(),
+		type:'user',
+		firstname:req.body.register[0].fname,
+		lastname:req.body.register[0].lname,
+		username:req.body.register[0].username,
+		password:hashed,
+		active:true
+	});
+
+	db.users.findOne({username:req.body.register[0].username, password:hashed}, function(err, success){
+		if(success){
+			res.redirect('/dash');
+		}else{
+			res.redirect('/');
+		}
+	});
+});
+
+app.post('/login', function(req,res){
+	var hashed = sha224("grubQuest"+req.body.users.username+req.body.users.password);
+	db.users.findOne({username:req.body.users.username, password:hashed}, function(err, success){
+		if(success){
+			res.redirect('/dash');
+			console.log("Success!");
+		}else{
+			console.log('Wrong username or password');
+			console.log(err);
+			res.redirect('/');
+		}
+	});
+});
+
 
 app.get("/results", function (req, res){
 	if(fs.existsSync('views/'+req.params.page+'.ejs')){
