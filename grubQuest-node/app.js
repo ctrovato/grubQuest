@@ -33,15 +33,17 @@ app.get("/", function(req, res){
 app.get('/:page',function(req, res){
 	//GETTING JSON AND PUTTING IT INTO AN ARRAY
 	//STILL CANT GET IT TO WRITE TO THE ACTUAL PAGE
-	
 	//new client 
 	//initialize with locu method
 	var vclient = new locu.VenueClient(key);
-	//search result objects stored in array
-	var searchVar = [];
 
 	vclient.search({has_menu: 'True', category: 'restaurant', postal_code: 32792}, function(results){
+		
+		//search result objects stored in array
+		var searchVar = new Array();
+
 		searchVar.push(results);
+
 		//returns "Subway"
 		console.log("Json: %j", searchVar[0].objects[0].name);
 		//returns all restaurants
