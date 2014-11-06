@@ -42,10 +42,17 @@ app.get('/:page',function(req, res){
 
 	vclient.search({has_menu: 'True', category: 'restaurant', postal_code: 32792}, function(results){
 		searchVar.push(results);
+		//returns "Subway"
+		console.log("Json: %j", searchVar[0].objects[0].name);
+		//returns all restaurants
 		console.log("Json: %j", searchVar);
+		return searchVar;
 	});
+
 	if(fs.existsSync('views/'+req.params.page+'.ejs')){
 		res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
+
+		res.write(searchVar[0].objects[0].name);
 
 	}else{
 		res.render('404: Page not found');
