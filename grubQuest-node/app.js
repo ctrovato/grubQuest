@@ -1,17 +1,19 @@
-var express = require("express");
-var http = require("http");
-var uId = require('node-uuid');
-var sha224 = require('js-sha256').sha224;
-var engine = require("ejs-locals");
-var fs = require('fs');
-var async = require("async");
-var locu = require('locu');
+var mongojs = require("mongojs"),
+	express = require("express"),
+	engine = require("ejs-locals"),
+	fs = require("fs"),
+	async = require("async"),
+	http = require("http"),
+	locu = require("locu"),			//locu lib
+	key = "2834e3e19203329d8c2d1d6208afdd0c44fe2ad6",	//API key
+	port = 4000;	//port number
 
 
 var collections = ["users"];
 var db = require("mongojs").connect("mongodb://localhost:27017/users", collections);
 
 
+//initlaize express
 var app = express();
 var httpServer = http.createServer(app);
 
@@ -23,13 +25,48 @@ app.set('view engine', 'ejs');
 app.use('/views', express.static('/views'));
 app.use('/assets', express.static(__dirname + '/assets'));
 
-
+//index route
 app.get("/", function(req, res){
-	res.render("index", {"Greeting": "Good morning"})
+	res.render("index", {"Greeting": "Good morning"});
+
 });
+
 app.get('/:page',function(req, res){
+	//GETTING JSON AND PUTTING IT INTO AN ARRAY
+	//STILL CANT GET IT TO WRITE TO THE ACTUAL PAGE
+
+	var locu = require('locu');
+	var key = '2834e3e19203329d8c2d1d6208afdd0c44fe2ad6';
+	var vclient = new locu.VenueClient(key);
+	var searchVar = [];
+	vclient.search({has_menu: 'True', category: 'restaurant', postal_code: 32792}, function(results){
+		searchVar.push(results);
+		console.log("Json: %j", searchVar);
+	});
+
+	//new client 
+	//initialize with locu method
+	var vclient = new locu.VenueClient(key);
+
+	vclient.search({has_menu: 'True', category: 'restaurant', postal_code: 32792}, function(results){
+		
+		//search result objects stored in array
+		global.searchVar = new Array();
+
+		global.searchVar.push(results);
+
+		//returns "Subway"
+		console.log("Json: %j", global.searchVar[0].objects[0].name);
+		//returns all restaurants
+		console.log("Json: %j", global.searchVar);
+		return global.searchVar;
+	});
+
 	if(fs.existsSync('views/'+req.params.page+'.ejs')){
 		res.render(req.params.page, {message: req.params.id});
+		//Using Global Variables returns this
+		//Cannot read property '0' of undefined
+		res.write("Json  ", global.searchVar[0], " ");
 	}else{
 		res.render('404: Page not found');
 	}
@@ -71,11 +108,15 @@ app.post('/login', function(req,res){
 });
 
 
-
-
-
+app.get("/results", function (req, res){
+	if(fs.existsSync('views/'+req.params.page+'.ejs')){
+		res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
+	}else{
+		res.render('404: Page not found');
+	}
+});
 
 // Start the Server
-httpServer.listen(4000, function() {
-	console.log('listening on port 4000');
+httpServer.listen(port, function() {
+	console.log('listening on port '+port);
 });

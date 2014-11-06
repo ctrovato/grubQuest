@@ -1,5 +1,4 @@
 <% layout('layout') -%>
-
 <% include header %>
 
 
@@ -31,17 +30,15 @@
 	    <li><a href="#">&raquo;</a></li>
 	  </ul>
 	</nav>
-
-
 	<% for(i=0; i<6; i++) { %>
 
 		<article class="col-sm-6 col-xs-12">
 			<div class="restaurant-result">
 				<ul class="col-xs-9">
-					<li><h3>Lucky China</h3></li>
-					<li>6756 Aloma Ave, Winter Park, FL 32792</li>
-					<li>(407) 679-4016</li>
-					<li>http://www.luckychinawinterpark.com/</li>
+					<li><h3><%=searchVar[0].objects[0].name%></h3></li>
+					<li><%=searchVar[0].objects[0].street_address%></li>
+					<li><%=searchVar[0].objects[0].phone%></li>
+					<li><%=searchVar[0].objects[0].website_url%></li>
 					<li><a href="#">Get Directions</a></li>
 				</ul>
 				<div class="col-xs-3">
