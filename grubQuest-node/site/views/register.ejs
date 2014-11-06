@@ -1,0 +1,18 @@
+<% layout('layout') -%>
+
+<% include header %>
+
+<main class="register">
+
+
+	<form class="col-sm-6 col-sm-offset-3">
+		<h1>Sign Up</h1>
+		<input id="fname" class="form-control" type="text" name="register[fname]" placeholder="First Name" required autofocus>
+		<input id="lname" class="form-control" type="text" name="register[lname]" placeholder="Last Name" required>
+		<input id="username" class="form-control" type="username" name="register[username]" placeholder="Username" required>
+		<input id="password" class="form-control" type="password" name="register[password]" placeholder="Password" required>
+		<button type="submit" class="register btn col-sm-4 col-sm-offset-8 col-xs-12 col-xs-offset-0" name="register">Sign Up</button>
+	</form>
+
+
+</main>
