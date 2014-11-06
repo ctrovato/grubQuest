@@ -31,7 +31,7 @@ var httpServer = http.createServer(app);
 // Set View Engine to EJS
 app.engine('ejs', engine);
 
-// set template engine to ejs 
+// set template engine to ejs
 app.set('view engine', 'ejs');
 app.use('/views', express.static('/views'));
 app.use('/assets', express.static(__dirname + '/assets'));
@@ -54,12 +54,12 @@ app.get("/", function(req, res){
 app.get('/:page',function(req, res){
 	//GETTING JSON AND PUTTING IT INTO AN ARRAY
 	//STILL CANT GET IT TO WRITE TO THE ACTUAL PAGE
-	//new client 
+	//new client
 	//initialize with locu method
 	var vclient = new locu.VenueClient(key);
 
 	vclient.search({has_menu: 'True', category: 'restaurant', postal_code: 32792}, function(results){
-		
+
 		//search result objects stored in array
 		global.searchVar = new Array();
 
@@ -73,7 +73,7 @@ app.get('/:page',function(req, res){
 		if(fs.existsSync('views/'+req.params.page+'.ejs')){
 			//Using Global Variables returns this
 			//Cannot read property '0' of undefined
-			
+
 			res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
 			res.write("Json  ", global.searchVar[0], " ");
 	}else{
@@ -90,7 +90,7 @@ app.get("/results", function (req, res){
 
 		res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
 
-		
+
 	}else{
 		res.render('404: Page not found');
 	}
