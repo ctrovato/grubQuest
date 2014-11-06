@@ -44,12 +44,12 @@ app.get('/:page',function(req, res){
 		console.log("Json: %j", searchVar);
 	});
 
-	//new client 
+	//new client
 	//initialize with locu method
 	var vclient = new locu.VenueClient(key);
 
 	vclient.search({has_menu: 'True', category: 'restaurant', postal_code: 32792}, function(results){
-		
+
 		//search result objects stored in array
 		global.searchVar = new Array();
 
@@ -63,10 +63,18 @@ app.get('/:page',function(req, res){
 	});
 
 	if(fs.existsSync('views/'+req.params.page+'.ejs')){
+
 		res.render(req.params.page, {message: req.params.id});
 		//Using Global Variables returns this
 		//Cannot read property '0' of undefined
 		res.write("Json  ", global.searchVar[0], " ");
+
+		//Using Global Variables returns this
+		//Cannot read property '0' of undefined
+		res.write("Json  ", global.searchVar[0], " ");
+
+		res.render(req.params.page, {message: req.params.id});
+
 	}else{
 		res.render('404: Page not found');
 	}
