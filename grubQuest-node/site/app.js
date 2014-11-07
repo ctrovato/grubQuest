@@ -52,72 +52,115 @@ app.get("/", function(req, res){
 });
 
 // NAVIGATE TO ANY PAGE OTHER THAN INDEX ----------------------------------------------------------------------------
-app.get('/:page',function(req, res){
-	//GETTING JSON AND PUTTING IT INTO AN ARRAY
-	//STILL CANT GET IT TO WRITE TO THE ACTUAL PAGE
-	//new client
-	//initialize with locu method
+// app.get('/:page',function(req, res){
+// 	console.log("NOT HERE AT THE WALL");
+// 	console.log(req.params.route);
+// 	//GETTING JSON AND PUTTING IT INTO AN ARRAY
+// 	//STILL CANT GET IT TO WRITE TO THE ACTUAL PAGE
+// 	//new client
+// 	//initialize with locu method
+// 	var vclient = new locu.VenueClient(key);
+
+// 	vclient.search({has_menu: 'True', category: 'restaurant', postal_code: 32792}, function(results){
+
+// 		//search result objects stored in array
+// 		global.searchVar = new Array();
+
+// 		global.searchVar.push(results);
+
+// 		//returns "Subway"
+// 		// console.log("Json: %j", global.searchVar[0].objects[0].name);
+// 		// //returns all restaurants
+// 		// console.log("Json: %j", global.searchVar);
+
+
+// 		if(fs.existsSync('views/'+req.params.page+'.ejs')){
+// 			//Using Global Variables returns this
+// 			//Cannot read property '0' of undefined
+
+// 			res.render(req.params.page, {message: req.params.id});
+// 			res.write("Json  ", global.searchVar[0], " ");
+// 	}else{
+// 		res.render('404: Page not found');
+// 	}
+// 	});
+
+// });
+
+
+
+// RESULTS PAGE ---------------------------------------------------------------------------------------------------
+app.get("/results/:zipcode", function (req, res){
+	console.log(req.route.path);
+
+	var zip = req.params.zipcode
+
 	var vclient = new locu.VenueClient(key);
 
-	vclient.search({has_menu: 'True', category: 'restaurant', postal_code: 32792}, function(results){
+	vclient.search({has_menu: 'True', category: 'restaurant', postal_code: zip}, function(results){
 
 		//search result objects stored in array
 		global.searchVar = new Array();
 
 		global.searchVar.push(results);
 
-		//returns "Subway"
-		console.log("Json: %j", global.searchVar[0].objects[0].name);
-		//returns all restaurants
-		console.log("Json: %j", global.searchVar);
+
+		// //returns all restaurants
+		// console.log("Json: %j", global.searchVar);
 
 
-		if(fs.existsSync('views/'+req.params.page+'.ejs')){
-			//Using Global Variables returns this
-			//Cannot read property '0' of undefined
+		if(fs.existsSync('views'+req.route.path+'.ejs')){
 
-			res.render(req.params.page, {message: req.params.id});
+			res.render("results");
 			res.write("Json  ", global.searchVar[0], " ");
 	}else{
 		res.render('404: Page not found');
 	}
 	});
-
-});
-
-
-
-// RESULTS PAGE ---------------------------------------------------------------------------------------------------
-app.get("/results", function (req, res){
-	if(fs.existsSync('views/'+req.params.page+'.ejs')){
-
-		res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
-
-
-	}else{
-		res.render('404: Page not found');
-	}
 });
 
 
 // DETAILS PAGE ---------------------------------------------------------------------------------------------------
-app.get("/details/:name/:menuId", function (req, res){
-	if(fs.existsSync('views/'+req.params.page+'.ejs')){
+app.get("/details/:menuId", function (req, res){
+	console.log(req.path);
+	console.log(req.params.menuId);
 
-		// console.log(url.parse("http://localhost:4000/details/?name=Subway&menuId=0898c257b1d80a428a3b",true).pathname);
+	var path = req.path
+
+	var lastIndex = path.lastIndexOf("/")
+	while(lastIndex > 1){
+		path = path.substring(0, lastIndex);
+		lastIndex = path.lastIndexOf("/");
+	};
+
+	console.log(path);
+
+	if(fs.existsSync('views'+path+'.ejs')){
 
 
-		res.render(req.params.page, {message: req.params.id});
+
+		console.log(url.parse("http://localhost:4000/details/?name=Subway&menuId=0898c257b1d80a428a3b").pathname);
+
+		// Create a for loop to initiate "i" ^^^
+			//loop the Id untill it matches
+			// then Display name etc..
+
+
+		res.render("details", {name: req.params.name});
+
+				// res.render("details", {name: req.params.name});
+				res.render("details", {name: req.params.menuId});
 
 
 	}else{
+		console.log("epic fails");
 		res.render('404: Page not found');
 	}
 });
 
 
 // REGISTER ---------------------------------------------------------------------------------------------------------
-app.post('/register', function(reg,res){
+app.post('/register', function(req,res){
 	var hashed = sha224("grubQuest"+req.body.register[0].username+req.body.register[0].password);
 	db.users.insert({
 		_id:uId.v4(),
