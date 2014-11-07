@@ -1,6 +1,7 @@
 var mongojs = require("mongojs"),
 	express = require("express"),
 	url = require("url"),
+	bodyParser = require("body-parser"),
 	// bodyParser = require('body-parser'),
 	// cookieParser = require('cookie-parser'),
 	// session = require('express-session'),
@@ -22,8 +23,11 @@ var mongojs = require("mongojs"),
 // 	db = require("mongojs").connect("mongodb://localhost:27017/users", collections);
 
 
-//initlaize express
+//initialize express
 var app = express();
+
+//initialize body parser
+app.use(bodyParser());
 
 // Create the http Server
 var httpServer = http.createServer(app);
@@ -51,47 +55,62 @@ app.get("/", function(req, res){
 });
 
 
-
 // RESULTS PAGE ---------------------------------------------------------------------------------------------------
-app.get("/results/:zipcode", function (req, res){
+//CHANGED TO APP.POST in order to recieve the incoming form data
+app.post("/results", function (req, res){
+
 	//take routed path
 	var path = req.path;
 
-	//slice off slashes at the end of it
-	var lastIndex = path.lastIndexOf("/")
+	//set last index
+	//which will start at the slash
+	var lastIndex = path.lastIndexOf("/");
+
+	//as long as there are slashes in the path name
+	//run this
 	while(lastIndex > 1){
+		//cuts slash off of path
 		path = path.substring(0, lastIndex);
 		lastIndex = path.lastIndexOf("/");
 	};
-	var zip = req.params.zipcode
 
+	//using body-parser
+	//get the zip code the user entered
+	global.zip = req.body.zip;
+
+	//make new client connection
 	var vclient = new locu.VenueClient(key);
 
+	//use locu library method to search for venues
+	//makes sure each restaurant has a menu, is a restaurant, and has the zip code
 	vclient.search({has_menu: 'True', category: 'restaurant', postal_code: zip}, function(results){
 
-		//search result objects stored in array
+		//global empty array made each time user searches
 		global.searchVar = new Array();
 
+		//push results into array
 		global.searchVar.push(results);
-
 
 		// //returns all restaurants
 		// console.log("Json: %j", global.searchVar);
 
-
+		//if path exists
 		if(fs.existsSync('views'+path+'.ejs')){
-
+			//render the page
 			res.render("results");
-			res.write("Json  ", global.searchVar[0], " ");
-	}else{
-		res.render('404: Page not found');
-	}
+			//write the all the data we need to the page
+			//which is search results and zipcode for the bread crumbs.
+			res.write("Json  ", global.searchVar[0], " ", global.zip);
+		}else{
+			//otherwise 404
+			res.render('404: Page not found');
+		}
 	});
 });
 
-
 // DETAILS PAGE ---------------------------------------------------------------------------------------------------
 app.get("/details/:menuId", function (req, res){
+	//for testing
 	// console.log(req.path);
 	// console.log(req.params.menuId);
 	// console.log(path);
@@ -100,9 +119,14 @@ app.get("/details/:menuId", function (req, res){
 	//take routed path
 	var path = req.path;
 
-	//slice off slashes at the end of it
-	var lastIndex = path.lastIndexOf("/")
+	//set last index
+	//which will start at the slash
+	var lastIndex = path.lastIndexOf("/");
+
+	//as long as there are slashes in the path name
+	//run this
 	while(lastIndex > 1){
+		//cuts slash off of path
 		path = path.substring(0, lastIndex);
 		lastIndex = path.lastIndexOf("/");
 	};
