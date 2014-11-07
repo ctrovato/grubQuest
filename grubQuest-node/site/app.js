@@ -22,7 +22,6 @@ var mongojs = require("mongojs"),
 // 	db = require("mongojs").connect("mongodb://localhost:27017/users", collections);
 
 
-
 //initlaize express
 var app = express();
 
@@ -51,48 +50,19 @@ app.get("/", function(req, res){
 	res.render("index", {"Greeting": "Good morning"});
 });
 
-// NAVIGATE TO ANY PAGE OTHER THAN INDEX ----------------------------------------------------------------------------
-// app.get('/:page',function(req, res){
-// 	console.log("NOT HERE AT THE WALL");
-// 	console.log(req.params.route);
-// 	//GETTING JSON AND PUTTING IT INTO AN ARRAY
-// 	//STILL CANT GET IT TO WRITE TO THE ACTUAL PAGE
-// 	//new client
-// 	//initialize with locu method
-// 	var vclient = new locu.VenueClient(key);
-
-// 	vclient.search({has_menu: 'True', category: 'restaurant', postal_code: 32792}, function(results){
-
-// 		//search result objects stored in array
-// 		global.searchVar = new Array();
-
-// 		global.searchVar.push(results);
-
-// 		//returns "Subway"
-// 		// console.log("Json: %j", global.searchVar[0].objects[0].name);
-// 		// //returns all restaurants
-// 		// console.log("Json: %j", global.searchVar);
-
-
-// 		if(fs.existsSync('views/'+req.params.page+'.ejs')){
-// 			//Using Global Variables returns this
-// 			//Cannot read property '0' of undefined
-
-// 			res.render(req.params.page, {message: req.params.id});
-// 			res.write("Json  ", global.searchVar[0], " ");
-// 	}else{
-// 		res.render('404: Page not found');
-// 	}
-// 	});
-
-// });
-
 
 
 // RESULTS PAGE ---------------------------------------------------------------------------------------------------
 app.get("/results/:zipcode", function (req, res){
-	console.log(req.route.path);
+	//take routed path
+	var path = req.path;
 
+	//slice off slashes at the end of it
+	var lastIndex = path.lastIndexOf("/")
+	while(lastIndex > 1){
+		path = path.substring(0, lastIndex);
+		lastIndex = path.lastIndexOf("/");
+	};
 	var zip = req.params.zipcode
 
 	var vclient = new locu.VenueClient(key);
@@ -109,7 +79,7 @@ app.get("/results/:zipcode", function (req, res){
 		// console.log("Json: %j", global.searchVar);
 
 
-		if(fs.existsSync('views'+req.route.path+'.ejs')){
+		if(fs.existsSync('views'+path+'.ejs')){
 
 			res.render("results");
 			res.write("Json  ", global.searchVar[0], " ");
@@ -122,38 +92,29 @@ app.get("/results/:zipcode", function (req, res){
 
 // DETAILS PAGE ---------------------------------------------------------------------------------------------------
 app.get("/details/:menuId", function (req, res){
-	console.log(req.path);
-	console.log(req.params.menuId);
+	// console.log(req.path);
+	// console.log(req.params.menuId);
+	// console.log(path);
 
-	var path = req.path
 
+	//take routed path
+	var path = req.path;
+
+	//slice off slashes at the end of it
 	var lastIndex = path.lastIndexOf("/")
 	while(lastIndex > 1){
 		path = path.substring(0, lastIndex);
 		lastIndex = path.lastIndexOf("/");
 	};
 
-	console.log(path);
-
+	//if that path exists
 	if(fs.existsSync('views'+path+'.ejs')){
-
-
-
-		console.log(url.parse("http://localhost:4000/details/?name=Subway&menuId=0898c257b1d80a428a3b").pathname);
-
-		// Create a for loop to initiate "i" ^^^
-			//loop the Id untill it matches
-			// then Display name etc..
-
-
-		res.render("details", {name: req.params.name});
-
-				// res.render("details", {name: req.params.name});
-				res.render("details", {name: req.params.menuId});
+		//render details page and pass menuId thru parameters
+		res.render("details", {name: req.params.menuId});
 
 
 	}else{
-		console.log("epic fails");
+		//if path does not exist
 		res.render('404: Page not found');
 	}
 });
@@ -196,6 +157,8 @@ app.post('/login', function(req,res){
 		}
 	});
 });
+
+
 
 // START THE SERVER ---------------------------------------------------------------------------------------------------
 httpServer.listen(port, function() {
