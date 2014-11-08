@@ -60,6 +60,8 @@ app.get("/", function(req, res){
 //CHANGED TO APP.POST in order to recieve the incoming form data
 app.post("/results", function (req, res){
 
+	var data = {};
+	
 	//take routed path
 	var path = req.path;
 
@@ -111,6 +113,9 @@ app.post("/results", function (req, res){
 
 // DETAILS PAGE ---------------------------------------------------------------------------------------------------
 app.get("/details/:menuId", function (req, res){
+
+	var data = {};
+
 	//for testing
 	// console.log(req.path);
 	// console.log(req.params.menuId);
@@ -141,17 +146,20 @@ app.get("/details/:menuId", function (req, res){
 
 			if(!error && result.statusCode == 200){
 				//renders menu in terminal
-				global.menuResults = JSON.parse(body);
-				console.log(global.menuResults.objects[0].name);
+				var menuResults = JSON.parse(body);
+
+				data.menuResults = menuResults;
+
+				res.render("details", data);
 			
 			}else{
 				console.log("shit");
 
 			}
 		});
-
-		res.render("details");
-		res.write("Json  ", global.menuResults, " ");
+		
+	
+		
 	}else{
 		//if path does not exist
 		res.render('404: Page not found');
