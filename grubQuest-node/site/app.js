@@ -159,7 +159,6 @@ app.get("/details/:menuId", function (req, res){
 	
 });
 
-
 // REGISTER ---------------------------------------------------------------------------------------------------------
 app.post('/register', function(req,res){
 	var hashed = sha224("grubQuest"+req.body.register[0].username+req.body.register[0].password);

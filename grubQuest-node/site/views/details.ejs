@@ -13,9 +13,9 @@
 	<article class="col-sm-12 col-xs-12">
 		<div class="restaurant-result">
 			<ul class="col-xs-10">
-				<li><h3></h3></li>
-				<li></li>
-				<li></li>
+				<li><h3><%=menuResults.objects[0].name%></h3></li>
+				<li>Located At <%=menuResults.objects[0].street_address%></li>
+				<li><%=menuResults.objects[0].phone%></li>
 				<li></li>
 				<li><a href="#">Get Directions</a></li>
 			</ul>
@@ -34,12 +34,12 @@
 		<table>
 			<thead>
 				<tr>
-					<th colspan="2">Lunch</th>
+					<th colspan="2"><%=menuResults.objects[0].menus[0].sections[0].section_name%></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td>Orange Chicken</td>
+					<td><%=menuResults.objects[0].menus[0].sections[0].subsections[0].contents[0].name%></td>
 					<td>$10.99</td>
 				</tr>
 				<tr>
