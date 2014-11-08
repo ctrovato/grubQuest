@@ -141,6 +141,7 @@ header .log-in{
 	border: 1px solid #008CB2;
 	overflow: hidden;
 	margin: 10px 0;
+	height: 180px;
 }
 .results .restaurant-result:hover{
 	background-color: #EFEFEF;
