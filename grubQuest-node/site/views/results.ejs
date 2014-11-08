@@ -43,7 +43,7 @@
 					<li><%=searchVar[0].objects[i].street_address%></li>
 					<li><%=searchVar[0].objects[i].phone%></li>
 					<li><%=searchVar[0].objects[i].website_url%></li>
-					<li><a href="https://www.google.com/maps/place/<%=searchVar[0].objects[i].street_address%>">Get Directions</a></li>
+					<li><a href="https://www.google.com/maps/place/<%=searchVar[0].objects[i].street_address %>+<%=searchVar[0].objects[i].postal_code%>">Get Directions</a></li>
 				</ul>
 				<div class="col-xs-3">
 					<img src="/assets/images/open.png" alt="open-now" class="open-now">
