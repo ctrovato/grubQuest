@@ -41,8 +41,30 @@
 
 -->
 
-	<div class="col-sm-6 col-xs-12">
-		<table>
+	<div class="col-xs-12">
+		
+		<% for(i=0; i<menuResults.objects[0].menus[0].sections.length; i++) { %>
+			<% var obj = menuResults.objects[0].menus[0].sections[i]; %>
+			<table>
+				<thead>
+					<tr>
+						<th colspan="2"><%=obj.section_name%></th>
+					</tr>
+				</thead>
+				<tbody>
+					
+						<% for(index in obj.subsections[0].contents) { %>
+							<tr>
+								<td><%=obj.subsections[0].contents[index].name%></td>
+								<td></td>
+							</tr>
+						<% } %>
+
+				</tbody>
+			</table>
+		<% } %>
+
+		<!-- <table>
 			<% for(index in menuResults.objects[0].menus[0].sections) { %>
 				<thead>
 					<tr>
@@ -58,7 +80,7 @@
 					<% } %>
 				</tbody>
 			<% } %>
-		</table>
+		</table> -->
 		
 	</div>
 
