@@ -3,20 +3,20 @@
 <% include header %>
 
 <main class="details">
-	
+
 	<ol class="breadcrumb">
-	  <li><a href="#">Home</a></li>
-	  <li><a href="#">Results</a></li>
-	  <li class="active">Lucky China</li>
+	  <li><a href="/">Home</a></li>
+	  <li><a href="/results">Results</a></li>
+	  <li class="active"></li>
 	</ol>
 
 	<article class="col-sm-12 col-xs-12">
 		<div class="restaurant-result">
 			<ul class="col-xs-10">
-				<li><h3>Lucky China</h3></li>
-				<li>6756 Aloma Ave, Winter Park, FL 32792</li>
-				<li>(407) 679-4016</li>
-				<li>http://www.luckychinawinterpark.com/</li>
+				<li><h3><%=menuResults.objects[0].name%></h3></li>
+				<li>Located At <%=menuResults.objects[0].street_address%></li>
+				<li><%=menuResults.objects[0].phone%></li>
+				<li></li>
 				<li><a href="#">Get Directions</a></li>
 			</ul>
 			<div class="col-xs-2">
@@ -34,12 +34,12 @@
 		<table>
 			<thead>
 				<tr>
-					<th colspan="2">Lunch</th>
+					<th colspan="2"><%=menuResults.objects[0].menus[0].sections[0].section_name%></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td>Orange Chicken</td>
+					<td><%=menuResults.objects[0].menus[0].sections[0].subsections[0].contents[0].name%></td>
 					<td>$10.99</td>
 				</tr>
 				<tr>
