@@ -1,6 +1,8 @@
 var mongojs = require("mongojs"),
 	express = require("express"),
 	url = require("url"),
+	bodyParser = require("body-parser"),
+	request = require("request"),
 	// bodyParser = require('body-parser'),
 	// cookieParser = require('cookie-parser'),
 	// session = require('express-session'),
@@ -22,9 +24,11 @@ var mongojs = require("mongojs"),
 // 	db = require("mongojs").connect("mongodb://localhost:27017/users", collections);
 
 
-
-//initlaize express
+//initialize express
 var app = express();
+
+//initialize body parser
+app.use(bodyParser());
 
 // Create the http Server
 var httpServer = http.createServer(app);
@@ -51,73 +55,120 @@ app.get("/", function(req, res){
 	res.render("index", {"Greeting": "Good morning"});
 });
 
-// NAVIGATE TO ANY PAGE OTHER THAN INDEX ----------------------------------------------------------------------------
-app.get('/:page',function(req, res){
-	//GETTING JSON AND PUTTING IT INTO AN ARRAY
-	//STILL CANT GET IT TO WRITE TO THE ACTUAL PAGE
-	//new client
-	//initialize with locu method
-	var vclient = new locu.VenueClient(key);
-
-	vclient.search({has_menu: 'True', category: 'restaurant', postal_code: 32792}, function(results){
-
-		//search result objects stored in array
-		global.searchVar = new Array();
-
-		global.searchVar.push(results);
-
-		//returns "Subway"
-		console.log("Json: %j", global.searchVar[0].objects[0].name);
-		//returns all restaurants
-		console.log("Json: %j", global.searchVar);
-
-
-		if(fs.existsSync('views/'+req.params.page+'.ejs')){
-			//Using Global Variables returns this
-			//Cannot read property '0' of undefined
-
-			res.render(req.params.page, {message: req.params.id});
-			res.write("Json  ", global.searchVar[0], " ");
-	}else{
-		res.render('404: Page not found');
-	}
-	});
-
-});
-
-
 
 // RESULTS PAGE ---------------------------------------------------------------------------------------------------
-app.get("/results", function (req, res){
-	if(fs.existsSync('views/'+req.params.page+'.ejs')){
+//CHANGED TO APP.POST in order to recieve the incoming form data
+app.post("/results", function (req, res){
 
-		res.render(req.params.page, {message: req.params.id, fullUrl : req.protocol + '://' + req.get('host') + req.originalUrl});
+	var data = {};
+	
+	//take routed path
+	var path = req.path;
 
+	//set last index
+	//which will start at the slash
+	var lastIndex = path.lastIndexOf("/");
 
-	}else{
-		res.render('404: Page not found');
-	}
+	//as long as there are slashes in the path name
+	//run this
+	while(lastIndex > 1){
+		//cuts slash off of path
+		path = path.substring(0, lastIndex);
+		lastIndex = path.lastIndexOf("/");
+	};
+
+	//using body-parser
+	//get the zip code the user entered
+	global.zip = req.body.zip;
+
+	//make new client connection
+	var vclient = new locu.VenueClient(key);
+
+	//use locu library method to search for venues
+	//makes sure each restaurant has a menu, is a restaurant, and has the zip code
+	vclient.search({has_menu: 'True', category: 'restaurant', postal_code: zip}, function(results){
+
+		//global empty array made each time user searches
+		global.searchVar = new Array();
+
+		//push results into array
+		global.searchVar.push(results);
+
+		// //returns all restaurants
+		// console.log("Json: %j", global.searchVar);
+
+		//if path exists
+		if(fs.existsSync('views'+path+'.ejs')){
+			//render the page
+			res.render("results");
+			//write the all the data we need to the page
+			//which is search results and zipcode for the bread crumbs.
+			res.write("Json  ", global.searchVar[0], " ", global.zip);
+		}else{
+			//otherwise 404
+			res.render('404: Page not found');
+		}
+	});
 });
-
 
 // DETAILS PAGE ---------------------------------------------------------------------------------------------------
-app.get("/details/:name/:menuId", function (req, res){
-	if(fs.existsSync('views/'+req.params.page+'.ejs')){
+app.get("/details/:menuId", function (req, res){
 
-		// console.log(url.parse("http://localhost:4000/details/?name=Subway&menuId=0898c257b1d80a428a3b",true).pathname);
+	var data = {};
+
+	//for testing
+	// console.log(req.path);
+	// console.log(req.params.menuId);
+	// console.log(path);
 
 
-		res.render(req.params.page, {message: req.params.id});
+	//take routed path
+	var path = req.path;
 
+	//set last index
+	//which will start at the slash
+	var lastIndex = path.lastIndexOf("/");
 
+	//as long as there are slashes in the path name
+	//run this
+	while(lastIndex > 1){
+		//cuts slash off of path
+		path = path.substring(0, lastIndex);
+		lastIndex = path.lastIndexOf("/");
+	};
+	
+
+	//if that path exists
+	if(fs.existsSync('views'+path+'.ejs')){
+
+		//make request to locu menu search
+		request("http://api.locu.com/v1_0/venue/"+req.params.menuId+"/?api_key="+key, function (error, result, body){
+
+			if(!error && result.statusCode == 200){
+				//renders menu in terminal
+				var menuResults = JSON.parse(body);
+
+				data.menuResults = menuResults;
+
+				res.render("details", data);
+			
+			}else{
+				console.log("shit");
+
+			}
+		});
+		
+	
+		
 	}else{
+		//if path does not exist
 		res.render('404: Page not found');
 	}
+	
 });
 
-
 // REGISTER ---------------------------------------------------------------------------------------------------------
-app.post('/register', function(reg,res){
+app.post('/register', function(req,res){
 	var hashed = sha224("grubQuest"+req.body.register[0].username+req.body.register[0].password);
 	db.users.insert({
 		_id:uId.v4(),
@@ -153,6 +204,8 @@ app.post('/login', function(req,res){
 		}
 	});
 });
+
+
 
 // START THE SERVER ---------------------------------------------------------------------------------------------------
 httpServer.listen(port, function() {

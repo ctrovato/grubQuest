@@ -7,16 +7,16 @@
 	<ol class="breadcrumb">
 	  <li><a href="/">Home</a></li>
 	  <li><a href="/results">Results</a></li>
-	  <li class="active"><%=searchVar[0].objects[i].name%></li>
+	  <li class="active"></li>
 	</ol>
 
 	<article class="col-sm-12 col-xs-12">
 		<div class="restaurant-result">
 			<ul class="col-xs-10">
-				<li><h3><%=searchVar[0].objects[i].name%></h3></li>
-				<li><%=searchVar[0].objects[i].street_address%></li>
-				<li><%=searchVar[0].objects[i].phone%></li>
-				<li><%=searchVar[0].objects[i].website_url%></li>
+				<li><h3><%=menuResults.objects[0].name%></h3></li>
+				<li>Located At <%=menuResults.objects[0].street_address%></li>
+				<li></li>
+				<li></li>
 				<li><a href="#">Get Directions</a></li>
 			</ul>
 			<div class="col-xs-2">
@@ -30,29 +30,40 @@
 		<h2>Restaurant Menu</h2>
 	</div>
 
+	<!--
+
+	//menuResults.objects[0].menus[0].sections[0].section_name
+	//menuResults.objects[0].menus[0].sections[0].subsections[0].contents[0].name
+	//menuResults.objects[0].phone
+	 //menuResults.objects[0].street_address
+	 //menuResults.objects[0].name
+
+
+-->
+
 	<div class="col-sm-6 col-xs-12">
 		<table>
 			<thead>
 				<tr>
-					<th colspan="2">Lunch</th>
+					<th colspan="2"><%=menuResults.objects[0].menus[0].sections[0].section_name%></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td>Orange Chicken</td>
-					<td>$10.99</td>
+					<td><%=menuResults.objects[0].menus[0].sections[0].subsections[0].contents[0].name%></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Orange Chicken</td>
-					<td>$10.99</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Orange Chicken</td>
-					<td>$10.99</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Orange Chicken</td>
-					<td>$10.99</td>
+					<td></td>
 				</tr>
 			</tbody>
 		</table>
@@ -65,19 +76,19 @@
 			<tbody>
 				<tr>
 					<td>Orange Chicken</td>
-					<td>$10.99</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Orange Chicken</td>
-					<td>$10.99</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Orange Chicken</td>
-					<td>$10.99</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Orange Chicken</td>
-					<td>$10.99</td>
+					<td></td>
 				</tr>
 			</tbody>
 		</table>
@@ -92,35 +103,35 @@
 			<tbody>
 				<tr>
 					<td>Orange Chicken</td>
-					<td>$10.99</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Orange Chicken</td>
-					<td>$10.99</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Orange Chicken</td>
-					<td>$10.99</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Orange Chicken</td>
-					<td>$10.99</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Orange Chicken</td>
-					<td>$10.99</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Orange Chicken</td>
-					<td>$10.99</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Orange Chicken</td>
-					<td>$10.99</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Orange Chicken</td>
-					<td>$10.99</td>
+					<td></td>
 				</tr>
 			</tbody>
 		</table>
