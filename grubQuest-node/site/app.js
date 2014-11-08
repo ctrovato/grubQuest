@@ -2,6 +2,7 @@ var mongojs = require("mongojs"),
 	express = require("express"),
 	url = require("url"),
 	bodyParser = require("body-parser"),
+	request = require("request"),
 	// bodyParser = require('body-parser'),
 	// cookieParser = require('cookie-parser'),
 	// session = require('express-session'),
@@ -130,17 +131,32 @@ app.get("/details/:menuId", function (req, res){
 		path = path.substring(0, lastIndex);
 		lastIndex = path.lastIndexOf("/");
 	};
+	
 
 	//if that path exists
 	if(fs.existsSync('views'+path+'.ejs')){
-		//render details page and pass menuId thru parameters
-		res.render("details", {name: req.params.menuId});
 
+		//make request to locu menu search
+		request("http://api.locu.com/v1_0/venue/"+req.params.menuId+"/?api_key="+key, function (error, result, body){
 
+			if(!error && result.statusCode == 200){
+				//renders menu in terminal
+				global.menuResults = JSON.parse(body);
+				console.log(global.menuResults.objects[0].name);
+			
+			}else{
+				console.log("shit");
+
+			}
+		});
+
+		res.render("details");
+		res.write("Json  ", global.menuResults, " ");
 	}else{
 		//if path does not exist
 		res.render('404: Page not found');
 	}
+	
 });
 
 
