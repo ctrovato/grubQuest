@@ -68,6 +68,10 @@ footer p{
 	margin-top: 100px;
 }
 
+.index{
+	background-image: url(../images/bg.jpg);
+}
+
 .index form div{
 	padding: 0 5px !important;
 }
