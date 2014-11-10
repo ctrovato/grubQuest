@@ -226,14 +226,14 @@ app.get("/login", function (req, res){
 
 // REGISTER ---------------------------------------------------------------------------------------------------------
 app.post('/register', function(req,res){
-	var hashed = sha224("grubQuest"+req.body.register[0].username+req.body.register[0].password);
+	// var hashed = sha224("grubQuest"+req.body.register[0].username+req.body.register[0].password);
 	db.users.insert({
 		_id:uId.v4(),
 		type:'user',
 		firstname:req.body.register[0].fname,
 		lastname:req.body.register[0].lname,
 		username:req.body.register[0].username,
-		password:hashed,
+		password:req.body.register[0].password,
 		active:true
 	});
 
@@ -250,7 +250,7 @@ app.post('/register', function(req,res){
 // LOGIN --------------------------------------------------------------------------------------------------------------
 app.post('/login', function(req,res){
 	var hashed = sha224("grubQuest"+req.body.users.username+req.body.users.password);
-	db.users.findOne({username:req.body.users.username, password:hashed}, function(err, success){
+	db.users.findOne({username:req.body.users.username, password:req.body.users.password}, function(err, success){
 		if(success){
 			res.redirect('/dash');
 			console.log("Success!");
