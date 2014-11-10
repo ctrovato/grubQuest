@@ -3,9 +3,8 @@ var mongojs = require("mongojs"),
 	url = require("url"),
 	bodyParser = require("body-parser"),
 	request = require("request"),
-	// bodyParser = require('body-parser'),
 	// cookieParser = require('cookie-parser'),
-	// session = require('express-session'),
+	session = require('express-session'),
 	engine = require("ejs-locals"),
 	fs = require("fs"),
 	async = require("async"),
@@ -22,6 +21,8 @@ var mongojs = require("mongojs"),
 // 		}), // Mongo connection
 // 	collections = ["users"],
 // 	db = require("mongojs").connect("mongodb://localhost:27017/users", collections);
+
+
 
 
 //initialize express
@@ -276,6 +277,11 @@ app.post('/register', function(req,res){
 
 // LOGIN --------------------------------------------------------------------------------------------------------------
 app.post('/login', function(req,res){
+
+
+
+
+
 	// var hashed = sha224("grubQuest"+req.body.users.username+req.body.users.password);
 	db.users.findOne({username:req.body.users.username, password:req.body.users.password}, function(err, success){
 		if(success){
@@ -289,6 +295,34 @@ app.post('/login', function(req,res){
 		}
 	});
 });
+
+
+
+app.post("/login/loginaction", function (req, res) {
+	var username = req.param("username");
+	var password = req.param("password");
+
+	db.users.findOne({username:username}, function (err, username){
+		if(!user){
+			res.redirect("/login");
+		}else{
+			if(user.password === password){
+				req.session.logged = 1;
+				req.session.userID = user._id;
+				req.session.username = user.username
+				res.redirect("/dash");
+			}else{
+				res.redirect("/login");
+			}
+		}
+
+	});
+
+
+});
+
+
+
 
 
 
