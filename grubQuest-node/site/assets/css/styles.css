@@ -33,7 +33,9 @@ a{
 }
 html, body {
   height: 100%;
+
 }
+
 .container {
 	min-height: 100%;
 	/* equal to footer height */
@@ -68,10 +70,13 @@ footer p{
 	margin-top: 100px;
 }
 
-.index{
-	background-image: url(../images/bg.jpg);
+.index html, body{
+  height: 100%;
+  background-image: url(../images/bg.jpg);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 100%;
 }
-
 .index form div{
 	padding: 0 5px !important;
 }
