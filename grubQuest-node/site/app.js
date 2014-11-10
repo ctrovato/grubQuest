@@ -167,6 +167,63 @@ app.get("/details/:menuId", function (req, res){
 	
 });
 
+//register route
+app.get("/register", function (req, res){
+
+	var path = req.path;
+	//set last index
+	//which will start at the slash
+	var lastIndex = path.lastIndexOf("/");
+
+	//as long as there are slashes in the path name
+	//run this
+	while(lastIndex > 1){
+		//cuts slash off of path
+		path = path.substring(0, lastIndex);
+		lastIndex = path.lastIndexOf("/");
+	};
+	
+
+	//if that path exists
+	if(fs.existsSync('views'+path+'.ejs')){
+
+		res.render("register");
+		
+	}else{
+		//if path does not exist
+		res.render('404: Page not found');
+	}
+
+});
+
+//login route
+app.get("/login", function (req, res){
+
+	var path = req.path;
+	//set last index
+	//which will start at the slash
+	var lastIndex = path.lastIndexOf("/");
+
+	//as long as there are slashes in the path name
+	//run this
+	while(lastIndex > 1){
+		//cuts slash off of path
+		path = path.substring(0, lastIndex);
+		lastIndex = path.lastIndexOf("/");
+	};
+	
+
+	//if that path exists
+	if(fs.existsSync('views'+path+'.ejs')){
+
+		res.render("login");
+		
+	}else{
+		//if path does not exist
+		res.render('404: Page not found');
+	}
+});
+
 // REGISTER ---------------------------------------------------------------------------------------------------------
 app.post('/register', function(req,res){
 	var hashed = sha224("grubQuest"+req.body.register[0].username+req.body.register[0].password);

@@ -1,23 +1,28 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/Users/CarmineTrovato/.nvm/v0.10.33/bin/node',
-1 verbose cli   '/Users/CarmineTrovato/.nvm/v0.10.33/bin/npm',
-1 verbose cli   'install',
-1 verbose cli   'body-parser' ]
-2 info using npm@1.4.28
-3 info using node@v0.10.33
-4 error Failed to parse json
-4 error Unexpected token <
-5 error File: /Applications/MAMP/htdocs/grubQuest/grubQuest-node/site/package.json
-6 error Failed to parse package.json data.
-6 error package.json must be actual JSON, not just JavaScript.
-6 error
-6 error This is not a bug in npm.
-6 error Tell the package author to fix their package.json file. JSON.parse
-7 error System Darwin 13.4.0
-8 error command "/Users/CarmineTrovato/.nvm/v0.10.33/bin/node" "/Users/CarmineTrovato/.nvm/v0.10.33/bin/npm" "install" "body-parser"
-9 error cwd /Applications/MAMP/htdocs/grubQuest/grubQuest-node/site
-10 error node -v v0.10.33
-11 error npm -v 1.4.28
-12 error file /Applications/MAMP/htdocs/grubQuest/grubQuest-node/site/package.json
-13 error code EJSONPARSE
-14 verbose exit [ 1, true ]
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'mongodb' ]
+2 info using npm@2.1.5
+3 info using node@v0.10.32
+4 verbose stack Error: Failed to parse json
+4 verbose stack Unexpected token <
+4 verbose stack     at parseError (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:378:25)
+4 verbose stack     at parseJson (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:85:51)
+4 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:59:33
+4 verbose stack     at evalmachine.<anonymous>:271:14
+4 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:102:5
+4 verbose stack     at Object.oncomplete (evalmachine.<anonymous>:107:15)
+5 verbose cwd /Users/eddiegemayel/grubQuest/grubQuest-node/site
+6 error Darwin 13.4.0
+7 error argv "node" "/usr/local/bin/npm" "install" "mongodb"
+8 error node v0.10.32
+9 error npm  v2.1.5
+10 error file /Users/eddiegemayel/grubQuest/grubQuest-node/site/package.json
+11 error code EJSONPARSE
+12 error Failed to parse json
+12 error Unexpected token <
+13 error File: /Users/eddiegemayel/grubQuest/grubQuest-node/site/package.json
+14 error Failed to parse package.json data.
+14 error package.json must be actual JSON, not just JavaScript.
+14 error
+14 error This is not a bug in npm.
+14 error Tell the package author to fix their package.json file. JSON.parse
+15 verbose exit [ 1, true ]
