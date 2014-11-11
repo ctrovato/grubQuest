@@ -4,24 +4,26 @@ var mongojs = require("mongojs"),
 	bodyParser = require("body-parser"),
 	request = require("request"),
 	// cookieParser = require('cookie-parser'),
-	// session = require('express-session'),
+	session = require('express-session'),
 	engine = require("ejs-locals"),
 	fs = require("fs"),
 	async = require("async"),
 	http = require("http"),
 	locu = require("locu"),			//locu lib
+	connectMongo = require('connect-mongo'),
+
+
 	key = "2834e3e19203329d8c2d1d6208afdd0c44fe2ad6",	//API key
 	port = 4000;	//port number
 
 
-// var MongoStore = require('connect-mongo')(session);
-// 	sessionStore = MongoStore({
-// 			'db':'mongosession',
-// 			'auto_reconnect': true
-// 		}), // Mongo connection
-// 	collections = ["users"],
-// 	db = require("mongojs").connect("mongodb://localhost:27017/users", collections);
-
+var ConnectMongo = connectMongo(session),
+	sessionStore = new ConnectMongo({
+			'db':'mongosession',
+			'auto_reconnect': true
+		}), // Mongo connection
+	collections = ["users"],
+	db = require("mongojs").connect("mongodb://localhost:27017/users", collections);
 
 
 
@@ -30,6 +32,11 @@ var app = express();
 
 //initialize body parser
 app.use(bodyParser());
+
+app.use(session({
+	store:sessionStore,
+	secret:"jkdsfaksjdfdsajl"
+}));
 
 // Create the http Server
 var httpServer = http.createServer(app);
@@ -158,9 +165,7 @@ app.get("/details/:menuId", function (req, res){
 
 			}
 		});
-		
 	
-		
 	}else{
 		//if path does not exist
 		res.render('404: Page not found');
@@ -213,7 +218,6 @@ app.get("/login", function (req, res){
 		lastIndex = path.lastIndexOf("/");
 	};
 	
-
 	//if that path exists
 	if(fs.existsSync('views'+path+'.ejs')){
 
@@ -225,7 +229,10 @@ app.get("/login", function (req, res){
 	}
 });
 
-app.post("/dash", function (req, res){
+app.get("/dash", function (req, res){
+	//initalize session
+	var session = req.session;
+
 	var path = req.path;
 	//set last index
 	//which will start at the slash
@@ -243,7 +250,9 @@ app.post("/dash", function (req, res){
 	//if that path exists
 	if(fs.existsSync('views'+path+'.ejs')){
 
-		res.render("dash");
+		res.render("dash", {
+			username:session.username
+		});
 		
 	}else{
 		//if path does not exist
@@ -277,18 +286,14 @@ app.post('/register', function(req,res){
 
 // LOGIN --------------------------------------------------------------------------------------------------------------
 app.post('/login', function(req,res){
-
-
-
-
-
-	// var hashed = sha224("grubQuest"+req.body.users.username+req.body.users.password);
 	db.users.findOne({username:req.body.users.username, password:req.body.users.password}, function(err, success){
 		if(success){
+			//if login matches push them to dashboard
 			res.redirect('/dash');
 			console.log("Success!");
 			console.log(req.body.users.username);
 		}else{
+			//if login doesn't match
 			console.log('Wrong username or password');
 			console.log(err);
 			res.redirect('/register');
@@ -296,14 +301,17 @@ app.post('/login', function(req,res){
 	});
 });
 
-
-
+//login action 
 app.post("/login/loginaction", function (req, res) {
+	//get username and password entered
 	var username = req.param("username");
 	var password = req.param("password");
 
-	db.users.findOne({username:username}, function (err, username){
+
+	db.users.findOne({username:username}, function (err, user){
+		console.log(user);
 		if(!user){
+			//if user doesnt match push back to login
 			res.redirect("/login");
 		}else{
 			if(user.password === password){
