@@ -109,9 +109,6 @@ app.post("/results", function (req, res){
 		if(fs.existsSync('views'+path+'.ejs')){
 			//render the page
 			res.render("results");
-			//write the all the data we need to the page
-			//which is search results and zipcode for the bread crumbs.
-			res.write("Json  ", global.searchVar[0], " ", global.zip);
 		}else{
 			//otherwise 404
 			res.render('404: Page not found');
