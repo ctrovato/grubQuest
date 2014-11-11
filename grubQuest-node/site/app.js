@@ -158,7 +158,7 @@ app.get("/details/:menuId", function (req, res){
 				res.render("details", data);
 			
 			}else{
-				console.log("shit");
+				console.log("oops");
 
 			}
 		});
