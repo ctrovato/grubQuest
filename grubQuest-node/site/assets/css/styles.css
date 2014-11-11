@@ -76,6 +76,10 @@ footer p{
 .index form input, .index form select{
 	margin: 5px 0;
 }
+.index input[name="zip"]{
+	margin-top: 10px;
+	height: 43px;
+}
 .index form button[type="submit"]{
 	width: 100%;
 	margin-top: 10px;
