@@ -70,13 +70,6 @@ footer p{
 	margin-top: 100px;
 }
 
-.index html, body{
-  height: 100%;
-  background-image: url(../images/bg.jpg);
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-size: 100%;
-}
 .index form div{
 	padding: 0 5px !important;
 }
@@ -118,6 +111,10 @@ header .log-in{
 
 
 /*----------------------- RESULTS ------------------------------*/
+
+.results .container{
+	background-color: #ffffff;
+}
 
 .results .alert{
 	background: #f5f5f5;
